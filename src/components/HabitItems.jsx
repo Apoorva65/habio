@@ -12,7 +12,7 @@ import { deleteCompleted, postCompleted } from '../api/completed';
 function HabitItems({habits,deleteHabitsbyId,setToggle}) {
 
   async function deleteOne(id){
-    deleteHabits(id)
+    await deleteHabits(id)
     deleteHabitsbyId(id)
   }
 

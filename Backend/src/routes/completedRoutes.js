@@ -8,7 +8,7 @@ router.post('/',(req,res)=>{
     const postCompleted = db.prepare(`INSERT INTO completed (habit_id,completed_date) VALUES (?,?)`)
     const result = postCompleted.run(habit_id,completed_date)
 
-    res.json({id : result.lastInsertRowid,habit_id,completed_date})
+    res.json({message : "Entry created"})
 })
 
 router.delete('/:id',(req,res)=>{

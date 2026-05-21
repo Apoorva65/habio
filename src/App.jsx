@@ -39,7 +39,7 @@ function App() {
   }
 
   function deleteHabitsbyId(id){
-    setHabits((prevHabits)=>prevHabits.filter((h)=>h.id!=id))
+    setHabits((prevHabits)=>prevHabits.filter((h)=>h.id!==id))
   }
 
   return (
