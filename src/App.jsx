@@ -28,10 +28,11 @@ const theme = createTheme({
 function App() {
 
   const [habits,setHabits] = useState([]);
+  const [toggle,setToggle] = useState(false);
 
   useEffect(()=>{
     getHabits().then(setHabits).catch(console.error)
-  },[])
+  },[toggle])
 
   function addHabits(habit){
     setHabits((prevHabits)=>[...prevHabits,habit])
@@ -45,7 +46,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline /> 
       <Topbar addHabits = {addHabits}/>
-      <HabitItems habits = {habits} deleteHabitsbyId = {deleteHabitsbyId}/>
+      <HabitItems habits = {habits} deleteHabitsbyId = {deleteHabitsbyId} setToggle = {setToggle}/>
     </ThemeProvider>
   )
 }

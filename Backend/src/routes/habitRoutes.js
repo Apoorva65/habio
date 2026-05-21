@@ -4,8 +4,13 @@ import db from '../db.js';
 const router = express.Router();
 
 router.get('/',(req,res)=>{
-    const getHabits = db.prepare('SELECT * FROM habit')
-    const habits = getHabits.all()
+    const today = new Date().toISOString().split('T')[0]
+    const getHabits = db.prepare(`SELECT h.id, h.habit_name, c.id as completion_id 
+                                         FROM habit h
+                                         LEFT JOIN completed c
+                                         ON c.habit_id = h.id
+                                         AND c.completed_date = ?`)
+    const habits = getHabits.all(today)
     res.json(habits)
 })
 
@@ -14,17 +19,17 @@ router.post('/',(req,res)=>{
     const postHabits = db.prepare(`INSERT INTO habit (habit_name) VALUES (?)`)
     const result = postHabits.run(habit_name)
 
-    res.json({id:result.lastInsertRowid,habit_name})
+    res.json({id:result.lastInsertRowid,habit_name,completion_id:null})
 })
 
-router.put('/:id',(req,res)=>{
-    const {id} = req.params
-    const {habit_name} = req.body
-    const updateHabit = db.prepare(`UPDATE habit set habit_name = ? WHERE id = ?`)
-    updateHabit.run(habit_name,id)
+// router.put('/:id',(req,res)=>{
+//     const {id} = req.params
+//     const {habit_name} = req.body
+//     const updateHabit = db.prepare(`UPDATE habit set habit_name = ? WHERE id = ?`)
+//     updateHabit.run(habit_name,id)
 
-    res.json({message : "Habit updated"})
-})
+//     res.json({message : "Habit updated"})
+// })
 
 router.delete('/:id',(req,res)=>{
     const {id} = req.params

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -7,12 +7,23 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Typography } from '@mui/material';
 import { deleteHabits } from '../api/habits';
+import { deleteCompleted, postCompleted } from '../api/completed';
 
-function HabitItems({habits,deleteHabitsbyId}) {
+function HabitItems({habits,deleteHabitsbyId,setToggle}) {
 
   async function deleteOne(id){
     deleteHabits(id)
     deleteHabitsbyId(id)
+  }
+
+  async function handleCheck(habit) {
+    if(habit.completion_id){
+      await deleteCompleted(habit.id,habit.completion_id)
+    }
+    else{
+      await postCompleted(habit.id)
+    }
+    setToggle(prev => !prev)
   }
 
   return (
@@ -27,7 +38,10 @@ function HabitItems({habits,deleteHabitsbyId}) {
         border: '0.5px solid',
         borderColor: 'divider',
       }}>
-            <Checkbox sx={{ color: 'text.secondary' }}/>
+            <Checkbox sx={{ color: 'text.secondary' }}
+            checked = {habit.completion_id!==null}
+            onChange={()=>handleCheck(habit)}
+            />
             <ListItemText primary={habit.habit_name} 
             primarytypographyprops={{
             fontSize: '15px',
