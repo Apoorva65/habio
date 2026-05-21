@@ -3,9 +3,18 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Typography } from '@mui/material';
+import { deleteHabits } from '../api/habits';
 
-function HabitItems({habits}) {
+function HabitItems({habits,deleteHabitsbyId}) {
+
+  async function deleteOne(id){
+    deleteHabits(id)
+    deleteHabitsbyId(id)
+  }
+
   return (
     <List sx={{ px: 3, py: 2, maxWidth: '600px', margin: '0 auto' }}>
       {habits.length > 0 ? (
@@ -25,6 +34,7 @@ function HabitItems({habits}) {
             fontWeight: 500,
             color: 'text.primary',
             }}/>
+            <Button color='error' onClick={()=>deleteOne(habit.id)}><DeleteIcon/></Button>
         </ListItem>
         ))
 ) : (

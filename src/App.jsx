@@ -35,15 +35,17 @@ function App() {
 
   function addHabits(habit){
     setHabits((prevHabits)=>[...prevHabits,habit])
-    console.log(habits);
-    
+  }
+
+  function deleteHabitsbyId(id){
+    setHabits((prevHabits)=>prevHabits.filter((h)=>h.id!=id))
   }
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline /> 
       <Topbar addHabits = {addHabits}/>
-      <HabitItems habits = {habits}/>
+      <HabitItems habits = {habits} deleteHabitsbyId = {deleteHabitsbyId}/>
     </ThemeProvider>
   )
 }
