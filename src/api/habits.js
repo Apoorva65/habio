@@ -13,3 +13,8 @@ export async function postHabits(habit_name) {
 export async function  deleteHabits(id) {
     await api.delete(`/habits/${id}`)
 }
+
+export async function getCompletedofHabit(id) {
+    const {data} = await api.get(`/habits/${id}`)
+    return data;   
+}

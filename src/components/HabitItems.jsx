@@ -9,8 +9,9 @@ import { Typography } from '@mui/material';
 import { deleteHabits } from '../api/habits';
 import { deleteCompleted, postCompleted } from '../api/completed';
 import { getStreak } from '../api/streaks';
+import Heatmap from './Heatmap';
 
-function HabitItems({habits,deleteHabitsbyId,setToggle}) {
+function HabitItems({habits,deleteHabitsbyId,setToggle,toggle}) {
 
   const [streak,setStreak] = useState({});
 
@@ -77,6 +78,7 @@ function HabitItems({habits,deleteHabitsbyId,setToggle}) {
                           🔥 {streak[habit.id] ?? 0}</span>}
             />
             <Button color='error' onClick={()=>deleteOne(habit.id)}><DeleteIcon/></Button>
+            <Heatmap habitId={habit.id} toggle={toggle}/>
         </ListItem>
         ))
 ) : (

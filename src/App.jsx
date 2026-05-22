@@ -46,7 +46,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline /> 
       <Topbar addHabits = {addHabits}/>
-      <HabitItems habits = {habits} deleteHabitsbyId = {deleteHabitsbyId} setToggle = {setToggle}/>
+      <HabitItems habits = {habits} deleteHabitsbyId = {deleteHabitsbyId} setToggle = {setToggle} toggle={toggle}/>
     </ThemeProvider>
   )
 }
