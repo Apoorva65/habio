@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -8,8 +8,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Typography } from '@mui/material';
 import { deleteHabits } from '../api/habits';
 import { deleteCompleted, postCompleted } from '../api/completed';
+import { getStreak } from '../api/streaks';
 
 function HabitItems({habits,deleteHabitsbyId,setToggle}) {
+
+  const [streak,setStreak] = useState({});
 
   async function deleteOne(id){
     await deleteHabits(id)
@@ -26,12 +29,33 @@ function HabitItems({habits,deleteHabitsbyId,setToggle}) {
     setToggle(prev => !prev)
   }
 
+  useEffect(()=>{
+    if(habits.length===0) return;
+
+    async function str() {
+      const ids = habits.map(h=>h.id);
+      const newStreaks = {}
+      for(let i=0;i<ids.length;i++){
+        const s = await getStreak(ids[i])
+        newStreaks[ids[i]] = s;
+      }
+      setStreak(newStreaks)
+      // console.log(streak);
+      
+    }
+
+    str();
+    
+  },[habits])
+
   return (
     <List sx={{ px: 3, py: 2, maxWidth: '600px', margin: '0 auto' }}>
       {habits.length > 0 ? (
         habits.map((habit) => (
         <ListItem key={habit.id}
         sx={{
+        display: 'flex', 
+        justifyContent: 'space-between',
         backgroundColor: 'background.paper',
         borderRadius: '10px',
         mb: 1,
@@ -48,6 +72,10 @@ function HabitItems({habits,deleteHabitsbyId,setToggle}) {
             fontWeight: 500,
             color: 'text.primary',
             }}/>
+
+            <ListItemText primary={<span style={{ display: 'flex', alignItems: 'center', gap: '4px', justifyContent: 'flex-end' }}>
+                          🔥 {streak[habit.id] ?? 0}</span>}
+            />
             <Button color='error' onClick={()=>deleteOne(habit.id)}><DeleteIcon/></Button>
         </ListItem>
         ))

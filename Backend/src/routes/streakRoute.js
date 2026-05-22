@@ -7,7 +7,7 @@ function calculateStreak(dates){
     if(dates.length === 0){
         return 0;
     }
-    const streak = 0;
+    let streak = 0;
     const current = new Date();
     current.setDate(current.getDate()-1)
 
@@ -28,13 +28,13 @@ function calculateStreak(dates){
 route.get('/:id',(req,res)=>{
     const {id} = req.params
     const completions = db.prepare(`SELECT completed_date FROM completed WHERE habit_id = ?
-                                    ORDER completed_date DESC`)
+                                    ORDER BY completed_date DESC`)
     const completionDates = completions.all(id)
 
     const dates = completionDates.map(c => c.completed_date)
     const streak = calculateStreak(dates);
 
-    res.json({streak})
+    res.json(streak)
 })
 
 export default route;
