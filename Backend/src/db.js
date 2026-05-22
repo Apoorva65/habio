@@ -1,6 +1,6 @@
 import {DatabaseSync} from 'node:sqlite'
 
-const db = new DatabaseSync(':memory:')
+const db = new DatabaseSync('habits.db')
 
 db.exec(`PRAGMA foreign_keys = ON`)
 
