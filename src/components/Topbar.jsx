@@ -66,6 +66,22 @@ function Topbar({addHabits}){
             </Typography>
           </Box>
 
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#90caf9",
+              mt: 0.5,
+              fontWeight: 500,
+            }}
+          >
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </Typography>
+
           <form
             onSubmit={createHabit}
             style={{
