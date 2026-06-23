@@ -1,16 +1,18 @@
-# React + Vite
+# Habio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Habio is a full-stack habit tracker built with **React, Material UI, Node.js, Express, and SQLite**.  
+Users can create habits, mark daily completion, track streaks, and view a simple **7 day heatmap** of progress.
 
-Currently, two official plugins are available:
+## Features
+- Add and delete habits
+- Mark habits as completed for a day
+- Track habit streaks from completion history
+- View a 7 day heatmap for each habit
+- Automatically remove related completion records when a habit is deleted
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+- React
+- Material UI
+- Node.js
+- Express
+- SQLite
