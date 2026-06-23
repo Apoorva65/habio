@@ -1,6 +1,6 @@
 # Habio
 
-Habio is a full-stack habit tracker built with **React, Material UI, Node.js, Express, and SQLite**.  
+Habio is a full stack habit tracker built with **React, Material UI, Node.js, Express, and SQLite**.  
 Users can create habits, mark daily completion, track streaks, and view a simple **7 day heatmap** of progress.
 
 ## Features
